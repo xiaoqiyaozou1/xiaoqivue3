@@ -1,0 +1,10 @@
+import axios from 'axios'
+
+const blogAxios = axios;
+blogAxios.defaults.baseURL = 'http://localhost:8081'
+blogAxios.interceptors.request.use(config => {
+    config.headers.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdCIsImp0aSI6ImFhYSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvZXhwaXJhdGlvbiI6IjIwMjEvMy8xMCAyMjowMjozMCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImEiLCJuYmYiOjE2MTUzODEzNTAsImV4cCI6MTY0NjkxNzM1MCwiaXNzIjoiSXNzdWVyIiwiYXVkIjoiQXVkaWVuY2UifQ.RC_DDoQbyCLfsVXjAaFT_ltGQmGXfFXsKHjs9WiDdlw'
+    return config
+})
+
+export default blogAxios
