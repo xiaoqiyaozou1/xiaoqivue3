@@ -12,15 +12,21 @@
       >
     </li>
   </ul>
+  <blog-page :pageInfo="pagerInfo" @change="pageChange"></blog-page>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
-import { getBlogDatas } from "../api/index";
+import { getBlogDatas, getBlogDataPage } from "../api/index";
+
+import BlogPage from "./BlogPage.vue";
 
 export default defineComponent({
   name: "ColumnList",
+  components: {
+    BlogPage,
+  },
   setup() {
     const router = useRouter();
     const showBlogContent = (id: string) => {
@@ -33,8 +39,27 @@ export default defineComponent({
     };
 
     const blogList = ref([]);
-    const getBlogList = async () => {
-      const { data } = await getBlogDatas("a");
+    // const getBlogList = async () => {
+    //   const { data } = await getBlogDatas("a");
+    //   blogList.value = data.response.map((o: any) => {
+    //     const newData = {
+    //       id: o.id,
+    //       title: o.title,
+    //       createTime: o.createTime.substring(0, 10),
+    //       tag: "string",
+    //     };
+    //     return newData;
+    //   });
+    // };
+    const pageParams = {
+      pageIndex: 1,
+      pageSize: 5,
+      title: "",
+    };
+
+    const getBlogListPage = async () => {
+      const { data } = await getBlogDataPage(pageParams);
+
       blogList.value = data.response.map((o: any) => {
         const newData = {
           id: o.id,
@@ -46,12 +71,24 @@ export default defineComponent({
       });
     };
     onMounted((): void => {
-      getBlogList();
+      getBlogListPage();
     });
+
+    const pagerInfo = reactive({
+      pageIndex: 1,
+      pageSize: 3,
+      perPages: 5,
+      total: 30,
+    });
+    const pageChange = (index: any) => {
+      alert(index);
+    };
     return {
       blogList,
       showBlogContent,
-      getBlogList,
+      getBlogListPage,
+      pagerInfo,
+      pageChange,
     };
   },
 });

@@ -5,6 +5,11 @@ export const getBlogDatas = (params: any) => {
     return blogAxios.get('/api/XqArticle/GetXqArticles')
 }
 
+/**根据条件 分页查询博客数据 */
+export const getBlogDataPage = (param: any) => {
+    return blogAxios.get('/api/XqArticle/GetArticlePage', { params: param })
+}
+
 /**根据id获取文章信息 */
 export const getBlogDataById = (id: any) => {
     return blogAxios.get('/api/XqArticle/GetXqArticleById', {
