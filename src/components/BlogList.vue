@@ -51,16 +51,44 @@ export default defineComponent({
     //     return newData;
     //   });
     // };
-    const pageParams = {
+    const pageParams = reactive({
       pageIndex: 1,
-      pageSize: 5,
+      pageSize: 8,
       title: "",
-    };
-
+    });
+    const pagerInfo = reactive({
+      pageIndex: 1,
+      pageSize: 8,
+      perPages: 5,
+      total: 0,
+    });
     const getBlogListPage = async () => {
       const { data } = await getBlogDataPage(pageParams);
 
-      blogList.value = data.response.map((o: any) => {
+      blogList.value = data.response.data.map((o: any) => {
+        const newData = {
+          id: o.id,
+          title: o.title,
+          createTime: o.createTime.substring(0, 10),
+          tag: "string",
+        };
+        return newData;
+      });
+      pagerInfo.total = data.response.total;
+    };
+    onMounted((): void => {
+      getBlogListPage();
+    });
+
+    const pageChange = async (index: any) => {
+      pageParams.pageIndex = index;
+      pageParams.title = "";
+      const { data } = await getBlogDataPage(pageParams);
+      pagerInfo.pageIndex = index;
+
+      pagerInfo.total = data.response.total;
+
+      blogList.value = data.response.data.map((o: any) => {
         const newData = {
           id: o.id,
           title: o.title,
@@ -70,23 +98,11 @@ export default defineComponent({
         return newData;
       });
     };
-    onMounted((): void => {
-      getBlogListPage();
-    });
-
-    const pagerInfo = reactive({
-      pageIndex: 1,
-      pageSize: 3,
-      perPages: 5,
-      total: 30,
-    });
-    const pageChange = (index: any) => {
-      alert(index);
-    };
     return {
       blogList,
       showBlogContent,
       getBlogListPage,
+      pageParams,
       pagerInfo,
       pageChange,
     };

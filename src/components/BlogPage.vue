@@ -79,6 +79,7 @@ export default defineComponent({
     });
 
     const goPage = (index: any) => {
+      currentIndex.value = index;
       context.emit("change", index);
     };
     const prevPage = () => {
