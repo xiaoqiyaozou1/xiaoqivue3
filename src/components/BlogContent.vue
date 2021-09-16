@@ -2,7 +2,7 @@
   <div>
     <h>{{ blogContent.title }}</h>
     <div v-html="blogContent.html"></div>
-    <div class="mb-3">
+    <!-- <div class="mb-3">
       <button
         type="button"
         class="btn btn-secondary"
@@ -20,12 +20,12 @@
       >
         取消
       </button>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 
 import { useRouter, useRoute } from "vue-router";
 import { getBlogDataById } from "../api/index";
@@ -56,6 +56,7 @@ export default defineComponent({
       blogContent.value.id = data.response.id;
       blogContent.value.title = data.response.title;
       blogContent.value.html = md.render(data.response.contentMd);
+      debugger;
     };
     onMounted((): void => {
       getBlogContet();
@@ -69,5 +70,9 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scope>
+img {
+  width: 480px;
+  height: 100%;
+}
 </style>

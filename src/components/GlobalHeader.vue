@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">{{ personInfo.name }}</a>
-      <div class="dropdown">
+      <!-- <div class="dropdown">
         <button
           class="btn btn-secondary dropdown-toggle xiaoqi-bg"
           type="button"
@@ -23,7 +23,7 @@
           <li><a class="dropdown-item" href="#">Another action</a></li>
           <li><a class="dropdown-item" href="#">Something else here</a></li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </nav>
 </template>

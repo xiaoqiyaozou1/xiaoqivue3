@@ -2,24 +2,34 @@
   <div class="home">
     <div class="headTop">
       <global-header :personInfo="headerList"></global-header>
+      <div>
+        <img class="titleImage" src="../assets/title.webp" />
+      </div>
     </div>
     <div class="headMenu">
-      <blog-menu :themeMenuList="themeMenuList"></blog-menu>
+      <blog-menu :themeMenuList="themeMenuList" class="blogmenu"></blog-menu>
     </div>
     <div class="content">
       <div class="contentList">
         <router-view></router-view>
       </div>
-
-      <div class="contentRight"></div>
+      <!-- 
+      <div class="contentRight"></div> -->
     </div>
     <footer class="text-center py-4 text-secondary bg-light mt-6">
       <small>
         <ul class="list-inline mb-0">
+          <li class="list-inline-item">
+            <a
+              href="https://beian.miit.gov.cn/#/Integrated/recordQuery"
+              target="_bank"
+            >
+              京ICP备2021015486号-1</a
+            >
+          </li>
           <li class="list-inline-item">© 2021 小七要走</li>
           <li class="list-inline-item">文档</li>
           <li class="list-inline-item">哈哈</li>
-          <li class="list-inline-item">66</li>
           <li class="list-inline-item">更多</li>
         </ul>
       </small>
@@ -47,18 +57,18 @@ const themeMenuDatas: ThemeObj[] = [
     isActive: "active",
     url: "/blogList",
   },
-  {
-    id: "aa",
-    title: "专题",
-    isActive: "false",
-    url: "/",
-  },
-  {
-    id: "qq",
-    title: "新笔记",
-    isActive: "false",
-    url: "/blodAdd",
-  },
+  // {
+  //   id: "aa",
+  //   title: "专题",
+  //   isActive: "false",
+  //   url: "/",
+  // },
+  // {
+  //   id: "qq",
+  //   title: "新笔记",
+  //   isActive: "false",
+  //   url: "/blodAdd",
+  // },
 ];
 export default defineComponent({
   name: "home",
@@ -83,10 +93,26 @@ export default defineComponent({
   margin-right: 0px;
 }
 .headTop {
-  height: 70px;
+  height: 400px;
+  margin: 10px;
+  text-align: center;
+}
+.titleImage {
+  margin: 0 auto;
+  width: 550px;
+  height: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .headMenu {
   height: 60px;
+  border: red;
+  width: 100%;
+  text-align: center;
+
+  /* background-color: rosybrown; */
+  box-shadow: -4px -4px 10px -8px rgba(255, 255, 255, 1),
+    4px 4px 10px -8px rgba(0, 0, 0, 0.3);
 }
 .content {
   display: flex;
@@ -94,14 +120,18 @@ export default defineComponent({
 }
 .contentList {
   width: 100%;
+  text-align: center;
 }
 .contentRight {
   width: 300px;
-  background-color: burlywood;
+  /* background-color: burlywood; */
 }
 .footer {
   width: 100%;
   height: 50px;
+}
+.blogmenu {
+  margin: 0 auto;
 }
 </style>>
 

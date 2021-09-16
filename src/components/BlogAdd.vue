@@ -1,11 +1,23 @@
 <template>
   <div id="main">
-    <div class="mb-3">
+    <div class="mb-3 title_p">
       <label for="exampleFormControlInput1" class="form-label">标题</label>
       <input type="email" class="form-control" v-model="blogContent.title" />
     </div>
-    <div class="mb-3">
+    <div class="mb-3 title_p">
       <label for="exampleFormControlTextarea1" class="form-label">内容</label>
+      <ul class="nav">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="#"
+            @click="handerFileClick"
+            >添加图片</a
+          >
+        </li>
+      </ul>
+      <input type="file" ref="inputFile" hidden @change="fileHanderChange" />
       <textarea
         class="form-control"
         rows="20"
@@ -51,9 +63,9 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, onMounted, ref } from "vue";
+import { ref, onMounted, defineComponent } from "vue";
 import { useRouter } from "vue-router";
-import { addBlogContent, getTags } from "../api/index";
+import { addBlogContent, getTags, commitFile, baseUrl } from "../api/index";
 import { getGuid } from "../common/index";
 
 export default defineComponent({
@@ -86,12 +98,35 @@ export default defineComponent({
       getAllTag();
     });
     const checkedInfo = ref([]);
+
+    const inputFile = ref<null | HTMLInputElement>(null);
+
+    const handerFileClick = () => {
+      inputFile.value?.click();
+    };
+
+    const fileHanderChange = async (e: Event) => {
+      const currentTarget = e.target as HTMLInputElement;
+      if (currentTarget.files) {
+        const formData = new FormData();
+        formData.append("file", currentTarget.files[0]);
+        debugger;
+        const { data } = await commitFile(formData);
+        const fileGuid = data.response;
+        const imageMd = "![imgage](" + baseUrl + "/" + fileGuid + "=700*300)";
+        blogContent.value.contentMd += imageMd;
+      }
+    };
+
     return {
       blogContent,
       commitData,
       checkArrInfo,
       checkedInfo,
       getAllTag,
+      handerFileClick,
+      inputFile,
+      fileHanderChange,
     };
   },
 });
@@ -106,5 +141,13 @@ export default defineComponent({
 .container-check .form-check {
   margin-left: 20px;
   padding-bottom: 20px;
+}
+
+img {
+  width: 480px;
+  height: 100%;
+}
+.title_p {
+  text-align: left;
 }
 </style>

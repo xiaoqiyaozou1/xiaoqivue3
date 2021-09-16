@@ -13,9 +13,9 @@
     "bootstrap": "^5.0.0-beta2",
     "markdown-it": "^12.0.4",
     "mavon-editor": "^2.9.1",
-    "vue": "^3.0.0",
+    "vue": "^3.2.2",
     "vue-router": "^4.0.4",
-    "vuex": "^3.6.2"
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.33.0",

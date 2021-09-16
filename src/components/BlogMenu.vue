@@ -1,5 +1,5 @@
 <template>
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs myMenu">
     <li
       class="nav-item"
       v-for="item in menuList"
@@ -49,5 +49,8 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
+.myMenu {
+  width: 500px;
+}
 </style>
