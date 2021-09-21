@@ -63,12 +63,12 @@ const themeMenuDatas: ThemeObj[] = [
   //   isActive: "false",
   //   url: "/",
   // },
-  // {
-  //   id: "qq",
-  //   title: "新笔记",
-  //   isActive: "false",
-  //   url: "/blodAdd",
-  // },
+  {
+    id: "qq",
+    title: "新笔记",
+    isActive: "false",
+    url: "/blodAdd",
+  },
 ];
 export default defineComponent({
   name: "home",

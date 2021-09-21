@@ -5,7 +5,7 @@
         <p class="listTitle">{{ item.title }}</p>
         <ul class="tagContent">
           <li>创建时间:</li>
-          <li>{{ item.createTime }}</li>
+          <li>{{ item.createTime.substring(0, 10) }}</li>
         </ul>
         <ul class="tagContent">
           <li>标签:</li>
@@ -16,12 +16,12 @@
             <a href="javascript:void(0);" @click="showBlogContent(item.id)">
               点我</a
             >
-            <!-- <a
+            <a
               href="javascript:void(0);"
               class="xq_do"
               @click="deleteBlogById(item.id)"
               >删除</a
-            > -->
+            >
           </li>
         </ul>
       </li>
@@ -31,10 +31,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, ref } from "vue";
+import { computed, defineComponent, onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "../store/index";
-import { getBlogDataPage, deleteBlog } from "../api/index";
+import { deleteBlog } from "../api/index";
 import BlogPage from "./BlogPage.vue";
 
 export default defineComponent({
@@ -44,6 +44,7 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter();
+    const store = useStore();
     const showBlogContent = (id: string) => {
       router.push({
         name: "blogContent",
@@ -53,7 +54,6 @@ export default defineComponent({
       });
     };
 
-    const blogList = ref([]);
     const pageParams = reactive({
       pageIndex: 1,
       pageSize: 8,
@@ -67,58 +67,26 @@ export default defineComponent({
     });
 
     const getBlogListPage = async () => {
-      const store = useStore();
-      //blogList = store.state.blogList;
-      debugger;
       await store.dispatch("updateBlogList", pageParams);
-      blogList.value = store.state.blogList.data.map((o: any) => {
-        const newData = {
-          id: o.id,
-          title: o.title,
-          createTime: o.createTime.substring(0, 10),
-          tag: "string",
-        };
-        return newData;
-      });
-      // const { data } = await getBlogDataPage(pageParams);
-      // blogList.value = data.response.data.map((o: any) => {
-      //   const newData = {
-      //     id: o.id,
-      //     title: o.title,
-      //     createTime: o.createTime.substring(0, 10),
-      //     tag: "string",
-      //   };
-      //   return newData;
-      // });
-      pagerInfo.total = store.state.blogList.total;
+      pagerInfo.total = store.state.blogData.total;
     };
     onMounted((): void => {
       getBlogListPage();
     });
 
-    const pageChange = async (index: any) => {
+    const pageChange = async (index: number) => {
       pageParams.pageIndex = index;
       pageParams.title = "";
-      const { data } = await getBlogDataPage(pageParams);
-      pagerInfo.pageIndex = index;
-      pagerInfo.total = data.response.total;
-      blogList.value = data.response.data.map((o: any) => {
-        const newData = {
-          id: o.id,
-          title: o.title,
-          createTime: o.createTime.substring(0, 10),
-          tag: "string",
-        };
-        return newData;
-      });
+      await store.dispatch("updateBlogList", pageParams);
     };
 
-    const deleteBlogById = async (id: any) => {
+    const deleteBlogById = async (id: string) => {
       if (confirm("确定要删除嘛？")) {
         await deleteBlog(id);
-        await getBlogListPage();
+        await store.dispatch("updateBlogList", pageParams);
       }
     };
+    const blogList = computed(() => store.state.blogData.blogList);
     return {
       blogList,
       showBlogContent,

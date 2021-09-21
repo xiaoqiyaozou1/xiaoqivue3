@@ -13,7 +13,7 @@
     "bootstrap": "^5.0.0-beta2",
     "markdown-it": "^12.0.4",
     "mavon-editor": "^2.9.1",
-    "vue": "^3.2.2",
+    "vue": "^3.2.11",
     "vue-router": "^4.0.4",
     "vuex": "^4.0.2"
   },
@@ -21,9 +21,9 @@
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.13",
     "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/compiler-sfc": "^3.2.11",
     "@vue/eslint-config-standard": "^5.1.2",
     "@vue/eslint-config-typescript": "^5.0.2",
     "eslint": "^6.7.2",
@@ -32,6 +32,6 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^7.0.0-0",
-    "typescript": "~3.9.3"
+    "typescript": "^4.4.3"
   }
 }

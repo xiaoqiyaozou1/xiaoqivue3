@@ -59,6 +59,7 @@ export default defineComponent({
   name: "BlogEdit",
   setup() {
     const router = useRouter();
+    const route = useRoute();
     const commitEditData = async (editData: any) => {
       const { data } = await editBlogContent(editData);
       if (data.success) {
@@ -66,7 +67,6 @@ export default defineComponent({
       }
     };
 
-    const route = useRoute();
     const editData = ref([]);
     const getEditBlog = async () => {
       const id: any = route.query.id;
@@ -80,7 +80,6 @@ export default defineComponent({
       inputFile.value?.click();
     };
     const fileHanderChange = async (e: Event) => {
-      debugger;
       const currentTarget = e.target as HTMLInputElement;
       if (currentTarget.files) {
         const formData = new FormData();
@@ -89,7 +88,7 @@ export default defineComponent({
         const fileGuid = data.response;
         const imageMd = "![imgage](" + baseUrl + "/" + fileGuid + "=700*300)";
         console.log(editData.value);
-        debugger;
+
         // editData.value.contentMd += imageMd;
       }
     };

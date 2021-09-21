@@ -56,7 +56,6 @@ export default defineComponent({
       blogContent.value.id = data.response.id;
       blogContent.value.title = data.response.title;
       blogContent.value.html = md.render(data.response.contentMd);
-      debugger;
     };
     onMounted((): void => {
       getBlogContet();

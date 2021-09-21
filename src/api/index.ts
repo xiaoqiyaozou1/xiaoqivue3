@@ -1,12 +1,15 @@
+/* eslint-disable */
+
+
 import blogAxios from './blogAxios'
 
 
 
-export const baseUrl = 'http://localhost:8081'
+export const baseUrl = ''
 
 
 /**获取所有文章信息 */
-export const getBlogDatas = (params: any) => {
+export const getBlogDatas = () => {
     return blogAxios.get('/api/XqArticle/GetXqArticles')
 }
 

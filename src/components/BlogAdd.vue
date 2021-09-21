@@ -1,3 +1,5 @@
+
+   
 <template>
   <div id="main">
     <div class="mb-3 title_p">
@@ -67,11 +69,11 @@ import { ref, onMounted, defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import { addBlogContent, getTags, commitFile, baseUrl } from "../api/index";
 import { getGuid } from "../common/index";
-
 export default defineComponent({
   name: "blogAdd",
   setup() {
     const router = useRouter();
+
     const blogContent = ref({
       id: "",
       title: "",
@@ -98,26 +100,21 @@ export default defineComponent({
       getAllTag();
     });
     const checkedInfo = ref([]);
-
     const inputFile = ref<null | HTMLInputElement>(null);
-
     const handerFileClick = () => {
       inputFile.value?.click();
     };
-
     const fileHanderChange = async (e: Event) => {
       const currentTarget = e.target as HTMLInputElement;
       if (currentTarget.files) {
         const formData = new FormData();
         formData.append("file", currentTarget.files[0]);
-        debugger;
         const { data } = await commitFile(formData);
         const fileGuid = data.response;
         const imageMd = "![imgage](" + baseUrl + "/" + fileGuid + "=700*300)";
         blogContent.value.contentMd += imageMd;
       }
     };
-
     return {
       blogContent,
       commitData,
@@ -142,7 +139,6 @@ export default defineComponent({
   margin-left: 20px;
   padding-bottom: 20px;
 }
-
 img {
   width: 480px;
   height: 100%;
@@ -151,3 +147,16 @@ img {
   text-align: left;
 }
 </style>
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete
