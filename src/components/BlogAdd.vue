@@ -57,6 +57,7 @@
         class="btn btn-secondary"
         data-bs-toggle="tooltip"
         data-bs-placement="right"
+        @click="cancelCommit"
       >
         取消
       </button>
@@ -65,15 +66,16 @@
 </template>
 
 <script lang='ts'>
-import { ref, onMounted, defineComponent } from "vue";
+import { ref, onMounted, defineComponent, computed } from "vue";
 import { useRouter } from "vue-router";
-import { addBlogContent, getTags, commitFile, baseUrl } from "../api/index";
+import { useStore } from "../store/index";
+import { addBlogContent, commitFile, baseUrl } from "../api/index";
 import { getGuid } from "../common/index";
 export default defineComponent({
   name: "blogAdd",
   setup() {
     const router = useRouter();
-
+    const store = useStore();
     const blogContent = ref({
       id: "",
       title: "",
@@ -81,6 +83,10 @@ export default defineComponent({
       typeId: "",
       userId: "",
     });
+
+    /**
+     * 上传列表
+     */
     const commitData = async () => {
       blogContent.value.id = getGuid();
       blogContent.value.typeId = getGuid();
@@ -90,12 +96,13 @@ export default defineComponent({
         router.push("/blogList");
       }
     };
-
-    const checkArrInfo = ref([]);
-    const getAllTag = async () => {
-      const { data } = await getTags("");
-      checkArrInfo.value = data.response;
+    const cancelCommit = () => {
+      router.push("/blogList");
     };
+    const getAllTag = async () => {
+      await store.dispatch("updateBlogTagList", "");
+    };
+    const checkArrInfo = computed(() => store.state.blogTagData.blogTagList);
     onMounted((): void => {
       getAllTag();
     });
@@ -118,6 +125,7 @@ export default defineComponent({
     return {
       blogContent,
       commitData,
+      cancelCommit,
       checkArrInfo,
       checkedInfo,
       getAllTag,
