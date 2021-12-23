@@ -5,7 +5,7 @@ import BlogContent from "../components/BlogContent.vue";
 import BlogAdd from '../components/BlogAdd.vue'
 import BlogList from '../components/BlogList.vue'
 import BlogEdit from '../components/BlogEdit.vue'
-
+import BlogAddEditor from "../components/BlogAddMdEditor.vue"
 const routerHistory = createWebHistory()
 const router = createRouter({
     history: routerHistory,
@@ -26,7 +26,7 @@ const router = createRouter({
             {
                 path: '/blodAdd',
                 name: 'blogAdd',
-                component: BlogAdd
+                component: BlogAddEditor
             }, {
                 path: '/blogList',
                 name: 'blogList',
@@ -36,7 +36,8 @@ const router = createRouter({
                 name: 'blogEdit',
                 component: BlogEdit
             }]
-    }
+    },
+
     ]
 })
 

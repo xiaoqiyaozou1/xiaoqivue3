@@ -24,7 +24,7 @@
         v-model="editData.contentMd"
       ></textarea>
     </div>
-    <div class="mb-3">
+    <div class="mb-3 blog-edit-foot">
       <button
         type="button"
         class="btn btn-secondary"
@@ -87,7 +87,6 @@ export default defineComponent({
         const { data } = await commitFile(formData);
         const fileGuid = data.response;
         const imageMd = "![imgage](" + baseUrl + "/" + fileGuid + "=700*300)";
-        console.log(editData.value);
 
         // editData.value.contentMd += imageMd;
       }
@@ -106,3 +105,11 @@ export default defineComponent({
   },
 });
 </script>
+
+
+<style scoped>
+.blog-edit-foot {
+  display: flex;
+  justify-items: flex-end;
+}
+</style>

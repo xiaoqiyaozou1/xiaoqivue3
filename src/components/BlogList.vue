@@ -1,31 +1,32 @@
 <template>
   <div class="my-blog-list">
-    <ul class="list-group">
-      <li class="list-group-item" v-for="item in blogList" :key="item.id">
-        <p class="listTitle">{{ item.title }}</p>
-        <ul class="tagContent">
-          <li>创建时间:</li>
-          <li>{{ item.createTime.substring(0, 10) }}</li>
-        </ul>
-        <ul class="tagContent">
-          <li>标签:</li>
-          <li>{{ item.tag }}</li>
-        </ul>
-        <ul class="xq_alldo">
-          <li>
-            <a href="javascript:void(0);" @click="showBlogContent(item.id)">
-              点我</a
+    <el-card class="box-card" v-for="(item, index) in blogList" :key="index">
+      <template #header>
+        <div class="card-header">
+          <span>{{ item.title }}</span>
+          <div>
+            <el-button
+              class="button"
+              type="text"
+              @click="showBlogContent(item.id)"
+              >查看</el-button
             >
-            <a
-              href="javascript:void(0);"
-              class="xq_do"
+            <el-button
+              class="button"
+              type="text"
               @click="deleteBlogById(item.id)"
-              >删除</a
+              >删除</el-button
             >
-          </li>
-        </ul>
-      </li>
-    </ul>
+          </div>
+        </div>
+      </template>
+      <div class="part-content">
+        内容摘要：{{ item.contentMd.substring(0, 50) }}
+      </div>
+      <div class="create-time">
+        {{ item.createTime.substring(0, 10) }}
+      </div>
+    </el-card>
     <blog-page :pageInfo="pagerInfo" @change="pageChange"></blog-page>
   </div>
 </template>
@@ -101,6 +102,33 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.part-content {
+  text-align: left;
+}
+.create-time {
+  text-align: right;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+
+.box-card {
+  width: 830px;
+  margin-top: 8px;
+}
+
+/***************************** */
+
 .xq_alldo {
   list-style: none;
   margin-right: 0px;

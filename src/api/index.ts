@@ -5,7 +5,7 @@ import blogAxios from './blogAxios'
 
 
 
-export const baseUrl = ''
+export const baseUrl = blogAxios.defaults.baseURL;
 
 
 /**获取所有文章信息 */

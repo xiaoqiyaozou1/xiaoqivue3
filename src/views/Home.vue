@@ -13,27 +13,19 @@
       <div class="contentList">
         <router-view></router-view>
       </div>
-      <!-- 
-      <div class="contentRight"></div> -->
     </div>
-    <footer class="text-center py-4 text-secondary bg-light mt-6">
-      <small>
-        <ul class="list-inline mb-0">
-          <li class="list-inline-item">
-            <a
-              href="https://beian.miit.gov.cn/#/Integrated/recordQuery"
-              target="_bank"
-            >
-              京ICP备2021015486号-1</a
-            >
-          </li>
-          <li class="list-inline-item">© 2021 小七要走</li>
-          <li class="list-inline-item">文档</li>
-          <li class="list-inline-item">哈哈</li>
-          <li class="list-inline-item">更多</li>
-        </ul>
-      </small>
-    </footer>
+    <div class="foot">
+      <ul>
+        <li>
+          <a
+            href="https://beian.miit.gov.cn/#/Integrated/recordQuery"
+            target="_bank"
+            >京ICP备2021015486号-1</a
+          >
+        </li>
+        <li>© 2021 小七要走</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -93,30 +85,29 @@ export default defineComponent({
   margin-right: 0px;
 }
 .headTop {
-  height: 400px;
-  margin: 10px;
+  height: 25rem;
+  margin: 0.625rem;
   text-align: center;
 }
 .titleImage {
   margin: 0 auto;
-  width: 550px;
+  width: 34.375rem;
   height: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
 }
 .headMenu {
-  height: 60px;
+  height: 3.75rem;
   border: red;
   width: 100%;
   text-align: center;
-
-  /* background-color: rosybrown; */
-  box-shadow: -4px -4px 10px -8px rgba(255, 255, 255, 1),
-    4px 4px 10px -8px rgba(0, 0, 0, 0.3);
+  /* background-color:rosybrown;
+	*/
+  box-shadow: -0.25rem -0.25rem 0.625rem -0.5rem rgba(255, 255, 255, 1),
+    0.25rem 0.25rem 0.625rem -0.5rem rgba(0, 0, 0, 0.3);
 }
 .content {
   display: flex;
-  height: 100%;
 }
 .contentList {
   width: 100%;
@@ -126,9 +117,18 @@ export default defineComponent({
   width: 300px;
   /* background-color: burlywood; */
 }
-.footer {
+.foot li {
+  list-style: none;
+  display: inline;
+}
+.foot ul {
+  display: block;
+  margin: 0 0 0 0;
+}
+.foot {
   width: 100%;
   height: 50px;
+  text-align: center;
 }
 .blogmenu {
   margin: 0 auto;

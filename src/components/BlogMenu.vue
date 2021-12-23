@@ -20,7 +20,7 @@ export interface ThemeObj {
   id: string;
   title: string;
   isActive?: string;
-  url?: string;
+  url: string;
 }
 export default defineComponent({
   name: "ThemeMenu",

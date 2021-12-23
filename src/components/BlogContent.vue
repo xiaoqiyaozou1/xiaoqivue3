@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h>{{ blogContent.title }}</h>
     <div v-html="blogContent.html"></div>
     <!-- <div class="mb-3">
@@ -70,6 +70,9 @@ export default defineComponent({
 </script>
 
 <style scope>
+.container {
+  text-align: left;
+}
 img {
   width: 480px;
   height: 100%;

@@ -9,6 +9,7 @@ export interface BlogList {
     id: string;
     title: string;
     createTime: string;
+    contentMd: string;
     tag: string;
 }
 

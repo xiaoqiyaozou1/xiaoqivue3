@@ -42,7 +42,7 @@
       {{ checkedInfo.join(",") }}
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 blog-add-foot">
       <button
         type="button"
         class="btn btn-secondary"
@@ -138,6 +138,10 @@ export default defineComponent({
 </script>
 
 <style scope>
+.blog-add-foot {
+  display: flex;
+  justify-content: flex-end;
+}
 .container-check {
   display: flex;
   width: 100%;
@@ -155,16 +159,3 @@ img {
   text-align: left;
 }
 </style>
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading complete
