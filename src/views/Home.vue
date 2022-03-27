@@ -2,9 +2,6 @@
   <div class="home">
     <div class="headTop">
       <global-header :personInfo="headerList"></global-header>
-      <div>
-        <img class="titleImage" src="../assets/title.webp" />
-      </div>
     </div>
     <div class="headMenu">
       <blog-menu :themeMenuList="themeMenuList" class="blogmenu"></blog-menu>
@@ -25,12 +22,15 @@
         </li>
         <li>© 2021 小七要走</li>
       </ul>
+      <ul>
+        <li>Powered by vue3 & .net core 3.1</li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import GlobalHeader, { UserLogin } from "../components/GlobalHeader.vue";
 import BlogMenu, { ThemeObj } from "../components/BlogMenu.vue";
 
@@ -69,15 +69,34 @@ export default defineComponent({
     BlogMenu,
   },
   setup() {
+    const nowDate = ref(new Date());
+
     return {
       headerList: headerDatas,
       themeMenuList: themeMenuDatas,
+      nowDate,
     };
   },
 });
 </script>
 
 <style scoped>
+.left-card {
+  margin-left: 15px;
+}
+.right-card {
+  margin-right: 15px;
+}
+.date-calendar {
+  height: 360px;
+  width: 500px;
+  margin-top: 10px;
+}
+.date-calendar /deep/ .el-calendar-table .el-calendar-day {
+  width: 50px;
+  height: 35px;
+}
+
 .home {
   width: 100%;
   height: 100%;
@@ -85,7 +104,7 @@ export default defineComponent({
   margin-right: 0px;
 }
 .headTop {
-  height: 25rem;
+  height: 5rem;
   margin: 0.625rem;
   text-align: center;
 }
@@ -100,7 +119,7 @@ export default defineComponent({
   height: 3.75rem;
   border: red;
   width: 100%;
-  text-align: center;
+  text-align: left;
   /* background-color:rosybrown;
 	*/
   box-shadow: -0.25rem -0.25rem 0.625rem -0.5rem rgba(255, 255, 255, 1),
@@ -111,7 +130,6 @@ export default defineComponent({
 }
 .contentList {
   width: 100%;
-  text-align: center;
 }
 .contentRight {
   width: 300px;
@@ -131,7 +149,7 @@ export default defineComponent({
   text-align: center;
 }
 .blogmenu {
-  margin: 0 auto;
+  margin: 0 auto 0 5rem;
 }
 </style>>
 

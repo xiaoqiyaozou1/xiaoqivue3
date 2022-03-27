@@ -57,3 +57,13 @@ export const commitFile = (params: any) => {
         }
     })
 }
+
+
+export const loginBlog = (count: any, pwd: any) => {
+    return blogAxios.get('/api/Login/Login', {
+        params: {
+            userCount: count,
+            passWord: pwd
+        }
+    })
+}

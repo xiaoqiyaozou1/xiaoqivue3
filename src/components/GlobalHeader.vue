@@ -2,39 +2,21 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">{{ personInfo.name }}</a>
-      <!-- <div class="dropdown">
-        <button
-          class="btn btn-secondary dropdown-toggle xiaoqi-bg"
-          type="button"
-          id="dropdownMenuButton1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-          @click="toggleOpen"
-        >
-          小七
-        </button>
-        <ul
-          class="dropdown-menu"
-          :style="{ display: 'block' }"
-          v-if="isOpen"
-          aria-labelledby="dropdownMenuButton1"
-        >
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div> -->
     </div>
+    <el-button @click="goLoginPage"> {{ loginStatus }}</el-button>
   </nav>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from "vue";
+import { defineComponent, onMounted, PropType, ref } from "vue";
 export interface UserLogin {
   isLogin: boolean;
   name?: string;
   id?: string;
 }
+
+import { useRouter } from "vue-router";
+import { ElMessage } from "element-plus";
 export default defineComponent({
   name: "GlobalHeader",
   props: {
@@ -48,9 +30,37 @@ export default defineComponent({
     const toggleOpen = () => {
       isOpen.value = !isOpen.value;
     };
+    const loginStatus = ref("登录");
+    const router = useRouter();
+    const goLoginPage = () => {
+      const isLogin = window.sessionStorage.getItem("isLogin");
+      if (isLogin === "true") {
+        window.sessionStorage.removeItem("isLogin");
+        window.sessionStorage.removeItem("blogToken");
+        loginStatus.value = "登录";
+        ElMessage({
+          message: "退出成功！",
+          type: "success",
+        });
+      } else {
+        router.push("/Login");
+      }
+    };
+
+    onMounted(() => {
+      const isLogin = window.sessionStorage.getItem("isLogin");
+      if (isLogin === "true") {
+        loginStatus.value = "退出";
+      } else {
+        loginStatus.value = "登录";
+      }
+    });
     return {
       isOpen,
       toggleOpen,
+
+      goLoginPage,
+      loginStatus,
     };
   },
 });

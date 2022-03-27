@@ -1,25 +1,34 @@
 <template>
   <div class="my-blog-list">
     <el-card class="box-card" v-for="(item, index) in blogList" :key="index">
-      <template #header>
+      <div class="header">
+        <div class="card-header-txt">
+          <span>{{ item.title }}</span>
+        </div>
+        <div class="card-header-btn">
+          <el-button
+            class="button"
+            type="text"
+            @click="showBlogContent(item.id)"
+            >查看</el-button
+          >
+          <el-button
+            class="button"
+            type="text"
+            @click="editBlogContent(item.id)"
+            >编辑</el-button
+          >
+          <el-button class="button" type="text" @click="deleteBlogById(item.id)"
+            >删除</el-button
+          >
+        </div>
+      </div>
+      <!-- <template #header>
         <div class="card-header">
           <span>{{ item.title }}</span>
-          <div>
-            <el-button
-              class="button"
-              type="text"
-              @click="showBlogContent(item.id)"
-              >查看</el-button
-            >
-            <el-button
-              class="button"
-              type="text"
-              @click="deleteBlogById(item.id)"
-              >删除</el-button
-            >
-          </div>
+          <div></div>
         </div>
-      </template>
+      </template> -->
       <div class="part-content">
         内容摘要：{{ item.contentMd.substring(0, 50) }}
       </div>
@@ -36,7 +45,7 @@ import { computed, defineComponent, onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "../store/index";
 import { deleteBlog } from "../api/index";
-import BlogPage from "./BlogPage.vue";
+import BlogPage from "../components/BlogPage.vue";
 
 export default defineComponent({
   name: "ColumnList",
@@ -50,6 +59,16 @@ export default defineComponent({
       router.push({
         name: "blogContent",
         query: {
+          id: id,
+        },
+      });
+    };
+
+    const editBlogContent = (id: string) => {
+      router.push({
+        path: "/blodAdd",
+        query: {
+          isEdit: "true",
           id: id,
         },
       });
@@ -91,6 +110,7 @@ export default defineComponent({
     return {
       blogList,
       showBlogContent,
+      editBlogContent,
       getBlogListPage,
       pageParams,
       pagerInfo,
@@ -102,6 +122,12 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 25px;
+  color: rgb(235, 117, 15);
+}
 .part-content {
   text-align: left;
 }
